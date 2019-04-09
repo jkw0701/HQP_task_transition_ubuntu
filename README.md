@@ -46,8 +46,12 @@ add_compile_options(-fPIC)
 ### How to start with V-REP ###
 Download V-REP [Link](http://www.coppeliarobotics.com/downloads.html) 
 
-after build, launch simulation.launch 
 ```sh
 cd V-REP_PRO_EDU_.. 
 ./vrep.sh -gREMOTEAPISERVERSERVICE_-1000_FALSE_TRUE'
 ```
+
+To increase the speed of the simulation, we modified the initial setup when the connection between 
+the server and the client is made. Please refer to https://github.com/BenjaminNavarro/vrep_remote_api_shm
+
+
