@@ -1,9 +1,12 @@
 # HQP_task_transition
 
-* This project is the controller for task transition based on Hierarchical Quadratic Programming(HQP).
-* This is developed in Ubuntu 16.04
+* This project is the whole-body controller for non-holonomic mobile manipulator.
+* This is based on Hierarchical Quadratic Programming(HQP) with continuous task transition approach.
+* This is developed for Ubuntu 16.04.
 
 ## Dependencies
+* boost
+* eigen3
 * qpOASES
 * RBDL(Rigid Body Dynamics Library)
 * V-REP
@@ -53,5 +56,9 @@ cd V-REP_PRO_EDU_..
 
 To increase the speed of the simulation, we modify the initial setup when the connection between 
 the server and the client is made. Please refer to https://github.com/BenjaminNavarro/vrep_remote_api_shm
+
+
+## Project build
+Download the project and build it
 
 
