@@ -1,7 +1,7 @@
 
 SET(PROJECT_NAME HQP)
-SET(PROJECT_DESCRIPTION "HQP algorithm for robostar robot")
-SET(PROJECT_URL "http://github.com/ggory15")
+SET(PROJECT_DESCRIPTION "HQP task transition algorithm for non-holonomic mobile manipulator")
+SET(PROJECT_URL "http://github.com/jkw0701")
 OPTION(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
 
 cmake_minimum_required(VERSION 2.8)
@@ -13,7 +13,6 @@ MESSAGE( STATUS "CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH} )
 
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
-#INCLUDE(cmake/eigen.cmake)
 INCLUDE(cmake/FindRBDL.cmake)
 INCLUDE(cmake/ide.cmake)
 
@@ -34,7 +33,6 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-#add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 set(CMAKE_BUILD_TYPE RELEASE)
 
 OPTION (INITIALIZE_WITH_NAN "Initialize Eigen entries with NaN" OFF)
@@ -158,6 +156,6 @@ ${Boost_SYSTEM_LIBRARY}
 )
 
 
-add_executable(test_franaka demo-robostar/demo.cpp)
-PKG_CONFIG_USE_DEPENDENCY(test_franaka eigen3)
-target_link_libraries(test_franaka HQP rbdl qpOASES pthread -lrt vrep_lib -lboost_system   ${Boost_FILESYSTEM_LIBRARY})
+add_executable(hqp_task_transition demo-robostar/demo.cpp)
+PKG_CONFIG_USE_DEPENDENCY(hqp_task_transition eigen3)
+target_link_libraries(hqp_task_transition HQP rbdl qpOASES pthread -lrt vrep_lib -lboost_system   ${Boost_FILESYSTEM_LIBRARY})
