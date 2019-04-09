@@ -42,12 +42,12 @@ add_compile_options(-fPIC)
 ```
 
 
-## VREP setup
-### How to start with VREP ###
-clone mujoco_ros_sim, then build. 
-* git clone https://github.com/saga702/mujoco_ros_sim
+## V-REP setup
+### How to start with V-REP ###
+Download V-REP [Link](http://www.coppeliarobotics.com/downloads.html) 
 
 after build, launch simulation.launch 
 ```sh
-roslaunch dyros_red_launch simulation.launch 
+cd V-REP_PRO_EDU_.. 
+./vrep.sh -gREMOTEAPISERVERSERVICE_-1000_FALSE_TRUE'
 ```
