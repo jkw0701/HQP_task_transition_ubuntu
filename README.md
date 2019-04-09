@@ -5,8 +5,8 @@
 * This is developed for Ubuntu 16.04.
 
 ## Related Works
-* A. Escande et al,"Hierarchical quadratic programming: Fast online humanoid-robot motion generation", IJRR, 2014.
-* S. Kim et al,"Continuous Task Transition Approach for Robot Controller Based on Hierarchical Quadratic Programming", IEEE Robotics and Automation Letters, 2019.
+* A. Escande et al, "Hierarchical quadratic programming: Fast online humanoid-robot motion generation", IJRR, 2014.
+* S. Kim et al, "Continuous Task Transition Approach for Robot Controller Based on Hierarchical Quadratic Programming", IEEE Robotics and Automation Letters, 2019.
 
 ## Dependencies
 * cmake(version >= 2.8)
