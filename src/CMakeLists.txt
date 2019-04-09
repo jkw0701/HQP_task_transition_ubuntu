@@ -61,10 +61,6 @@ SET(${LIBRARY_NAME}_FORMULATIONS_SOURCES
     controller/inverse-dynamics.cpp    
     )
 
-SET(${LIBRARY_NAME}_FCL_SOURCES
-    fcl/fcl_utility.cpp
-    fcl/fcl_model.cpp
-  )
 
 
 SET(${LIBRARY_NAME}_SOURCES
@@ -75,7 +71,6 @@ SET(${LIBRARY_NAME}_SOURCES
     ${${LIBRARY_NAME}_SOLVERS_SOURCES}
     ${${LIBRARY_NAME}_ROBOTS_SOURCES}
     ${${LIBRARY_NAME}_FORMULATIONS_SOURCES}
-    ${${LIBRARY_NAME}_FCL_SOURCES}
     ${VREP_ROOT}/programming/remoteApi/extApi.c
     ${VREP_ROOT}/programming/remoteApi/extApiPlatform.c
     utils/utils.cpp

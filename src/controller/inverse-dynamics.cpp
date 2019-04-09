@@ -154,27 +154,6 @@ bool InverseDynamics::addJointLimitTask(TaskJointLimit & task, double weight, un
 
 	return true;
 }
-bool InverseDynamics::addSingularityTask(TaskSingularityAvoidance & task, double weight, unsigned int priorityLevel, double transition_duration) {
-	assert(weight >= 0.0);
-	assert(transition_duration >= 0.0);
-
-	// This part is not used frequently so we can do some tests.
-	if (weight >= 0.0)
-		std::cerr << __FILE__ << " " << __LINE__ << " "
-		<< "weight should be positive" << std::endl;
-
-	// This part is not used frequently so we can do some tests.
-	if (transition_duration >= 0.0) {
-		std::cerr << "transition_duration should be positive" << std::endl;
-	}
-
-	TaskLevel *tl = new TaskLevel(task, priorityLevel);
-	m_taskMotions.push_back(tl);
-	addTask(tl, weight, priorityLevel);
-
-	return true;
-}
-
 
 bool InverseDynamics::addOperationalTask(TaskSE3Equality & task, double weight, unsigned int priorityLevel, double transition_duration)
 {

@@ -17,46 +17,6 @@ INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/FindRBDL.cmake)
 INCLUDE(cmake/ide.cmake)
 
-############## FCL #################
-find_package(PkgConfig QUIET)
-find_package(fcl QUIET)
-find_package(Boost COMPONENTS filesystem)
-
-if (fcl_FOUND)
-message("fcl found!")
-endif (fcl_FOUND)
-
-if(PKG_CONFIG_FOUND)
-  pkg_check_modules(CCD ccd)
-  # check to see if the pkg is installed under the libccd name
-  if(NOT CCD_FOUND)
-    pkg_check_modules(CCD libccd)
-  endif()
-endif()
-
-if(NOT CCD_FOUND)
-    # if pkgconfig is not installed, then fall back on more fragile detection
-    # of ccd
-    find_path(CCD_INCLUDE_DIRS ccd/ccd.h)
-    find_library(CCD_LIBRARY
-        ${CMAKE_SHARED_LIBRARY_PREFIX}ccd${CMAKE_SHARED_LIBRARY_SUFFIX})
-    if(CCD_INCLUDE_DIRS AND CCD_LIBRARY)
-        set(CCD_LIBRARIES "${CCD_LIBRARY}")
-    else()
-        message(FATAL_ERROR "Libccd is required by FCL")
-    endif()
-endif()
-include_directories(${CCD_INCLUDE_DIRS})
-link_directories(${CCD_LIBRARY_DIRS})
-
-if(NOT MSVC)
-    set(PKG_CFLAGS "-std=c++11")
-endif()
-
-
-
-##################################################
-
 IF(APPLE)
   APPLY_DEFAULT_APPLE_CONFIGURATION()
 ENDIF(APPLE)
@@ -96,10 +56,6 @@ include_directories(
   ${Boost_INCLUDE_DIR}
   ${VREP_PATH}/remoteApi 
   ${VREP_PATH}/include
-
-  ${fcl_INCLUDE_DIRS}
-  ${FCL_INCLUDE_DIRS}
-  ${CCD_LIBRARY_DIRS}
 )
 
 if(MSVC)
@@ -161,10 +117,6 @@ SET(${PROJECT_NAME}_VREP_BRIDGE_HEADERS
     include/vrep_bridge/vrep_bridge.h
     include/vrep_bridge/shared_memory.h
 )
-SET(${PROJECT_NAME}_FCL_HEADERS
-include/fcl/fcl_utility.h
-include/fcl/fcl_model.h
-)
 
 SET(HEADERS
     include/fwd.h
@@ -177,7 +129,6 @@ SET(HEADERS
     ${${PROJECT_NAME}_UTILS_HEADERS}
     ${${PROJECT_NAME}_VREP_BRIDGE_HEADERS}
     ${${PROJECT_NAME}_ROBOT_HEADERS}       
-    ${${PROJECT_NAME}_FCL_HEADERS}       
 
 )
 LIST(REMOVE_DUPLICATES HEADERS)
@@ -207,6 +158,6 @@ ${Boost_SYSTEM_LIBRARY}
 )
 
 
-add_executable(test_mobile_mani demo-robostar/demo.cpp)
-PKG_CONFIG_USE_DEPENDENCY(test_mobile_mani eigen3)
-target_link_libraries(test_mobile_mani HQP rbdl qpOASES pthread -lrt fcl vrep_lib -lboost_system   ${Boost_FILESYSTEM_LIBRARY})
+add_executable(test_franaka demo-robostar/demo.cpp)
+PKG_CONFIG_USE_DEPENDENCY(test_franaka eigen3)
+target_link_libraries(test_franaka HQP rbdl qpOASES pthread -lrt vrep_lib -lboost_system   ${Boost_FILESYSTEM_LIBRARY})

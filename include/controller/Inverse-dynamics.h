@@ -14,8 +14,6 @@
 #include "tasks/task-operational.h"
 #include "tasks/task-joint-bounds.h"
 #include "tasks/task-mobile.h"
-#include "tasks/task-singularity.h"
-#include "tasks/task-selfcollision.h"
 // for solvers
 #include "solvers/solver-HQP-qpoases.h"
 // for contact
@@ -59,18 +57,13 @@ namespace HQP {
 		typedef robot::RobotModel RobotModel;
 		typedef tasks::TaskBase TaskBase;
 		typedef tasks::TaskMotion TaskMotion;
-		// typedef tasks::TaskCom TaskCom;
 		typedef tasks::TaskJointPosture TaskJointPosture;
 		typedef tasks::TaskOperationalSpace TaskSE3Equality;
 		typedef tasks::TaskJointLimit TaskJointLimit;
-		typedef tasks::TaskSingularityAvoidance TaskSingularityAvoidance;
-		//typedef tasks::TaskContactForce TaskContactForce;
-		//typedef tasks::TaskActuation TaskActuation;
 		typedef tasks::TaskOperationalObstacle TaskOperationalObstacle;
 		typedef solver::HQPOutput HQPOutput;
 		typedef solver::HQPData HQPData;
 		typedef contact::ContactBase ContactBase;
-		//typedef tasks::TaskSelfCollision TaskSelfCollision;
 
 
 		InverseDynamics(RobotModel & robot, bool verbose = false);
@@ -84,7 +77,6 @@ namespace HQP {
 		bool addMotionTask(TaskMotion & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
 		bool addJointPostureTask(TaskJointPosture & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
 		bool addJointLimitTask(TaskJointLimit & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
-		bool addSingularityTask(TaskSingularityAvoidance & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
 		bool addOperationalTask(TaskSE3Equality & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
 		bool addObstacleTask(TaskOperationalObstacle & task, double weight, unsigned int priorityLevel, double transition_duration = 0.0);
 		bool addRigidContact(ContactBase & contact, unsigned int priorityLevel);

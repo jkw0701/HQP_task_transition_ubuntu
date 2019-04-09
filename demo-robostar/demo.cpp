@@ -10,8 +10,6 @@
 #include "tasks/task-joint-posture.h"
 #include "tasks/task-joint-bounds.h"
 #include "tasks/task-mobile.h"
-#include "tasks/task-singularity.h"
-#include "tasks/task-selfcollision.h"
 // for trajectories 
 #include "trajectories/trajectory-operationalspace.h"
 #include "trajectories/trajectory-jointspace.h"
@@ -32,9 +30,6 @@
 #include <termios.h>
 #include <unistd.h>
 
-
-// for fcl
-#include <fcl/fcl_model.h>
 
 
 FILE *fp6 = fopen("SCA_acceleration_avoidance.txt","w");
@@ -64,7 +59,6 @@ HQP::tasks::TaskJointPosture * jointTask, *jointTask2;
 HQP::tasks::TaskOperationalSpace * moveTask, * move2Task;
 HQP::tasks::TaskJointLimit * jointLimitTask;
 HQP::contact::Contact3dPoint * contactTask;
-HQP::tasks::TaskSingularityAvoidance * singularTask;
 HQP::tasks::TaskOperationalObstacle * ObstacleAvoid;
 HQP::tasks::TaskMobile * mobileTask;
 
@@ -73,7 +67,6 @@ HQP::trajectories::TrajectoryJointCubic * trajPosture,*trajPosture2;
 HQP::trajectories::TrajectoryJointConstant * trajPostureConstant;
 HQP::trajectories::TrajectoryOperationCubic * trajEECubic, *trajmobile;
 HQP::trajectories::TrajectoryOperationConstant * trajEEConstant;
-HQP::fclmodel::FCL_MODEL * fcl_model;
 
 FILE *fp1 = fopen("hqp_joint_pos_obs.txt","w");
 VectorXd q(dof);
@@ -120,7 +113,6 @@ int localpid(void) {
 
 int main()
 {
- //  FCL_MODEL fm;
   	
 	wheel_prev.setZero();
 	wheel_curr.setZero();
@@ -128,9 +120,6 @@ int main()
    robot_ = new HQP::robot::RobotModel(1); // 0: Manipulator, 1: Mobile Manipulaotr, 2: humanoid
    na = robot_->na();	
    nv = robot_->nv();
-
-   fcl_model = new HQP::fclmodel::FCL_MODEL(*robot_);
-   fcl_model->initializeModel();
 
    invdyn_ = new HQP::InverseDynamics(*robot_);
    q.setZero();
@@ -250,11 +239,6 @@ int main()
 				mode_change = true;
 				HQP_flag = true;
 				break;	
-			case 's': // Swapping priorities ( 3 tasks )
-				ctrl_mode = 3;
-				mode_change = true;
-				HQP_flag = true;
-				break;
 			case 'q':
 				vb.isSimulationRun = false;
 				vb.exitFlag = true;
@@ -290,11 +274,6 @@ int main()
 				
 				robot_->getUpdateKinematics(q_current, qdot_current);
 				robot_->getMobilePos(vb.mobile_center);
-
- 				/////////// fcl //////////////////
-				// fcl_model->updateLinkInfo(q_current);			
-				// fcl_model->checkDistancePairs();
-				// fcl_model->getClosestJacobian();
 
 				if (ctrl_mode == 0)
 				{
