@@ -12,7 +12,6 @@ LIST( APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}" )
 MESSAGE( STATUS "CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH} )
 
 INCLUDE(cmake/base.cmake)
-INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/FindRBDL.cmake)
 INCLUDE(cmake/ide.cmake)
 
@@ -41,7 +40,6 @@ OPTION (EIGEN_NO_AUTOMATIC_RESIZING "If ON, it forbids automatic resizing of dyn
 
 ADD_REQUIRED_DEPENDENCY("eigen3 >= 3.2.0")
 
-SEARCH_FOR_BOOST()
 set (VREP_ROOT
     $ENV{HOME}/vrep/
     CACHE "VRep root dir" STRING)
@@ -51,16 +49,9 @@ include_directories(
   ${RBDL_INCLUDE_DIR}
   ${VREP_ROOT}/programming/include 
   ${VREP_ROOT}/programming/remoteApi
-  ${Boost_INCLUDE_DIR}
   ${VREP_PATH}/remoteApi 
   ${VREP_PATH}/include
 )
-
-if(MSVC)
-    add_definitions(-DBOOST_ALL_NO_LIB)
-endif()
-add_definitions(-DBOOST_TEST_DYN_LINK)
-
 
 SET(${PROJECT_NAME}_TASKS_HEADERS
     include/tasks/task-base.h
@@ -151,11 +142,9 @@ add_library(vrep_lib
 ${VREP_ROOT}/programming/remoteApi/extApi.c
 ${VREP_ROOT}/programming/remoteApi/extApiPlatform.c
 ${VREP_ROOT}/programming/common/shared_memory.c
-${Boost_FILESYSTEM_LIBRARY}
-${Boost_SYSTEM_LIBRARY}
 )
 
 
 add_executable(hqp_task_transition demo-robostar/demo.cpp)
 PKG_CONFIG_USE_DEPENDENCY(hqp_task_transition eigen3)
-target_link_libraries(hqp_task_transition HQP rbdl qpOASES pthread -lrt vrep_lib -lboost_system   ${Boost_FILESYSTEM_LIBRARY})
+target_link_libraries(hqp_task_transition HQP rbdl qpOASES pthread -lrt vrep_lib )
