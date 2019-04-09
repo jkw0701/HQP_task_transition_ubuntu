@@ -48,10 +48,10 @@ Download V-REP [Link](http://www.coppeliarobotics.com/downloads.html)
 
 ```sh
 cd V-REP_PRO_EDU_.. 
-./vrep.sh -gREMOTEAPISERVERSERVICE_-1000_FALSE_TRUE'
+./vrep.sh -gREMOTEAPISERVERSERVICE_-1000_FALSE_TRUE
 ```
 
-To increase the speed of the simulation, we modified the initial setup when the connection between 
+To increase the speed of the simulation, we modify the initial setup when the connection between 
 the server and the client is made. Please refer to https://github.com/BenjaminNavarro/vrep_remote_api_shm
 
 
