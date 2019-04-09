@@ -21,7 +21,7 @@ unzip default.zip
 cd rbdl-rbdl-0879ee8c548a
 mkdir build
 cd build
-cmake -D RBDL_BUILD_ADDON_URDFREADER=ON ..
+cmake ..
 make all
 sudo make install
 ```
