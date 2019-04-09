@@ -5,7 +5,7 @@
 * This is developed for Ubuntu 16.04.
 
 ## Dependencies
-* boost
+* cmake(version >= 2.8)
 * eigen3
 * qpOASES
 * RBDL(Rigid Body Dynamics Library)
@@ -57,8 +57,5 @@ cd V-REP_PRO_EDU_..
 To increase the speed of the simulation, we modify the initial setup when the connection between 
 the server and the client is made. Please refer to https://github.com/BenjaminNavarro/vrep_remote_api_shm
 
-
-## Project build
-Download the project and build it
 
 
